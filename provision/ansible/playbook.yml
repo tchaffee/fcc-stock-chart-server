@@ -1,0 +1,45 @@
+- hosts: all
+  become: yes
+  vars:
+    mongodb_conf_port: 27400
+    mongodb_version: "3.2.12"
+    node_versions:
+      - 7.1.0
+    node_packages: null
+  pre_tasks:
+  - name: update apt cache
+    apt: update_cache=yes
+
+  tasks:
+  - name: Install packages
+    apt:
+      name: "{{item}}"
+      state: latest
+    with_items:
+     - git
+     # Needed for electron
+     - libgtk2.0-0
+     - libxtst6
+     - libgconf2-4
+     - libasound2
+     - libnss3
+     - libxss1
+#    - nodejs
+#    - nodejs-legacy
+#    - npm
+
+  roles:
+  - fubarhouse.nodejs
+
+#  - npm:
+#      path: /vagrant/node-app
+
+#  roles:
+#  - Stouts.mongodb
+#  - votum.ngrok
+
+# TODO: Create the mongod service files.
+# NOTE: The service name should be mongod!!! Fix the stouts.mongodb defaults.
+# See https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04
+
+# TODO: Update the MEAN template project?

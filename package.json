@@ -1,0 +1,29 @@
+{
+  "name": "node-server",
+  "version": "1.0.0",
+  "description": "freeCodeCamp Stock Chart - Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run server",
+    "server": "babel-watch src/server.js",
+    "test": "node_modules/.bin/cucumber-js test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-watch": "^2.0.6",
+    "cucumber": "^2.0.0-rc.7",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "ws": "^2.1.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.23.1",
+    "dotenv": "^4.0.0",
+    "lodash": "^4.17.4"
+  }
+}
