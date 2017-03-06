@@ -11,7 +11,7 @@ Feature: A websocket API client can add and remove stock symbols
   Scenario: Reset the list of stocks
     Given I make a connection "primary"
     And I open a connection "primary"
-    And I add a stock to the list on connection "primary"
+    And I add "SHLD" stock to the list on connection "primary"
     When I send the following JSON string using connection "primary":
     """
     {
@@ -19,6 +19,22 @@ Feature: A websocket API client can add and remove stock symbols
     }
     """
     Then I should eventually get an empty list of "stocks" from connection "primary"
+
+  Scenario: Get a list of stocks
+    Given I make a connection "primary"
+    And I open a connection "primary"
+    And I add " " stock to the list on connection "primary"
+    When I send the following JSON string using connection "primary":
+    """
+    {
+      "action": "GET_STOCKS"
+    }
+    """
+    Then I should eventually get a message from connection "primary" containing:
+    """
+    ""
+    """
+
 
   Scenario: Add a stock
     Given I make a connection "primary"
@@ -115,14 +131,14 @@ Feature: A websocket API client can add and remove stock symbols
     """
     {
       "action": "ADD_STOCK",
-      "symbol": "SEARS"
+      "symbol": "SHLD"
     }
     """
     Then I should get a listened message from connection "primary" containing:
     """
-    "SEARS"
+    "SHLD"
     """
     And I should get a listened message from connection "secondary" containing:
     """
-    "SEARS"
+    "SHLD"
     """

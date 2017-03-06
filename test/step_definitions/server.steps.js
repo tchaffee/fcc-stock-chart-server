@@ -64,19 +64,19 @@ defineSupportCode(({ Given, When, Then }) => {
     serverAddress = arg1;
   });
 
-  Given('I add a stock to the list on connection {arg1:stringInDoubleQuotes}', function (arg1, callback) {
+  Given('I add {arg1:stringInDoubleQuotes} stock to the list on connection {arg2:stringInDoubleQuotes}', function (arg1, arg2, callback) {
     const eventListener = (message) => {
       console.log('Added a stock....');
       console.log(message);
-      if (message.includes('SEARS')) {
-        ws[arg1].removeEventListener('message', eventListener);
+      if (message.includes(arg1)) {
+        ws[arg2].removeEventListener('message', eventListener);
         callback();
       }
     };
 
-    ws[arg1].on('message', eventListener);
+    ws[arg2].on('message', eventListener);
 
-    ws[arg1].send('{ "action": "ADD_STOCK", "symbol": "SEARS" }');
+    ws[arg2].send(`{ "action": "ADD_STOCK", "symbol": "${arg1}" }`);
   });
 
   Given('The list of stocks is reset to empty on connection {arg1:stringInDoubleQuotes}', function (arg1, callback) {

@@ -38,6 +38,10 @@ wss.on('connection', (ws) => {
         returnObj = { stocks: stocksList };
         wss.broadcast(JSON.stringify(returnObj));
         break;
+      case 'GET_STOCKS':
+        returnObj = { stocks: stocksList };
+        ws.send(JSON.stringify(returnObj));
+        break;
       default:
         returnObj = { error: `Unknown action: '${msgObj.action}'` };
         ws.send(JSON.stringify(returnObj));
